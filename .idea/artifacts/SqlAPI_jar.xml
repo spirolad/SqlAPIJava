@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="SqlAPI:jar">
+    <output-path>$USER_HOME$/Desktop/plugin/API</output-path>
+    <root id="archive" name="SqlAPI.jar">
+      <element id="module-output" name="SqlAPI" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,5 @@
+com\seizonia\sql\SqlRequeteSelectBuilder.class
+com\seizonia\sql\SqlRequeteInsertBuilder.class
+com\seizonia\sql\ConnectionManage.class
+com\seizonia\sql\SqlRequeteUpdateBuilder.class
+com\seizonia\sql\ConnectionManage$1.class
