@@ -1,4 +1,4 @@
-package com.seizonia.sql;
+package com.seizonia.sql.BasicRequest;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

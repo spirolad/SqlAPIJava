@@ -1,4 +1,4 @@
-package com.seizonia.sql;
+package com.seizonia.sql.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

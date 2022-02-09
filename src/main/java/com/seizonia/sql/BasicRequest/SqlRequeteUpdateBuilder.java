@@ -1,4 +1,4 @@
-package com.seizonia.sql;
+package com.seizonia.sql.BasicRequest;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,43 +6,40 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class SqlRequeteInsertBuilder {
+public class SqlRequeteUpdateBuilder {
 
     private Map<String, Object> objectMap;
     private String table_name;
     private Connection connection;
+    private String where;
+    private Object value;
 
-    /**
-     * @param table_name -> the name of the table where you want insert someone
-     * @param connection
-     */
 
-    public SqlRequeteInsertBuilder(String table_name, Connection connection){
-        objectMap = new LinkedHashMap<>();
+    public SqlRequeteUpdateBuilder(String table_name, Connection connection, String where, Object value){
+        objectMap = new LinkedHashMap<String, Object>();
         this.table_name = table_name;
         this.connection = connection;
+        this.where = where;
+        this.value = value;
     }
 
     public void generateRequest() {
-        StringBuilder sql_data = new StringBuilder();
         StringBuilder sql_value = new StringBuilder();
         objectMap.forEach((entry, key) -> {
-            sql_data.append((sql_data.toString().equalsIgnoreCase("")) ? entry : "," + entry);
-            sql_value.append((sql_value.toString().equalsIgnoreCase("")) ? "?" : ",?");
+            sql_value.append((sql_value.toString().equalsIgnoreCase("")) ? entry+" = ?" : ", "+entry+" = ?");
         });
         PreparedStatement statement = null;
         try {
-
-            statement = connection.prepareStatement("INSERT INTO " + table_name + "(" + sql_data + ") VALUES (" + sql_value + ")");
+            statement = connection.prepareStatement("UPDATE " + table_name + " SET " + sql_value + " WHERE " + where + " = ?");
             int i = 1;
             for (Object o : objectMap.values()) {
                 statement.setObject(i, o);
                 i++;
             }
-            statement.executeUpdate();
+            statement.setObject(i, value);
+            statement.execute();
         } catch (SQLException e){
             e.printStackTrace();
-            System.out.println("");
             System.out.println("[SoCore] Une erreur SQL est arrivé: " + this.getClass().getName());
         } finally {
             try {
@@ -53,10 +50,11 @@ public class SqlRequeteInsertBuilder {
         }
     }
 
-    public SqlRequeteInsertBuilder add(String data, Object value){
+    public SqlRequeteUpdateBuilder add(String data, Object value){
         this.objectMap.put(data, value);
         return this;
     }
 
     public Map<String, Object> getObjectMap() { return objectMap; }
+
 }
