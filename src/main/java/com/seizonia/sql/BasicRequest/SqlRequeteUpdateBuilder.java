@@ -40,7 +40,7 @@ public class SqlRequeteUpdateBuilder {
             statement.execute();
         } catch (SQLException e){
             e.printStackTrace();
-            System.out.println("[SoCore] Une erreur SQL est arrivé: " + this.getClass().getName());
+            System.out.println("Une erreur SQL est arrivé: " + this.getClass().getName());
         } finally {
             try {
                 statement.close();
