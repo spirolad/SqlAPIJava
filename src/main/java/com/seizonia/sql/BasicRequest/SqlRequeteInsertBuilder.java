@@ -42,8 +42,6 @@ public class SqlRequeteInsertBuilder {
             statement.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();
-            System.out.println("");
-            System.out.println("Une erreur SQL est arrivé: " + this.getClass().getName());
         } finally {
             try {
                 statement.close();
