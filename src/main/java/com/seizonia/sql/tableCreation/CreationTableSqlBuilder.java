@@ -22,7 +22,6 @@ public class CreationTableSqlBuilder {
     public void generateRequest() {
         PreparedStatement statement = null;
         try {
-            System.out.println(getRequestString());
             statement = connection.prepareStatement(getRequestString());
             statement.execute();
         } catch (SQLException e) {
